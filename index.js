@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const { crawlData } = require("./helper/crawlData");
+const { default: axios } = require("axios");
 const router = require("express").Router();
 
 app.use(
@@ -10,10 +11,22 @@ app.use(
   })
 );
 
+// router.get("/api/v1/transaction", async (req, res) => {
+//   try {
+//     const result = await crawlData();
+
+//     return res.status(200).json({
+//       result,
+//     });
+//   } catch (error) {
+//     return res.status(500).json(error);
+//   }
+// });
+
 router.get("/api/v1/transaction", async (req, res) => {
   try {
-    const result = await crawlData();
-
+    const res = await axios.get("http://103.37.61.145/api/v1/transaction");
+    const result = res.data?.result;
     return res.status(200).json({
       result,
     });
