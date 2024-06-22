@@ -11,9 +11,10 @@ app.use(
   })
 );
 
-router.get("/api/v1/transaction", async (req, res) => {
+router.get("/api/v1/transaction/:url", async (req, res) => {
   try {
-    const result = await crawlData();
+    const url = req.params.url || ""
+    const result = await crawlData(url);
 
     return res.status(200).json({
       result,
@@ -25,6 +26,6 @@ router.get("/api/v1/transaction", async (req, res) => {
 
 app.use(router);
 
-app.listen(3000, () => {
+app.listen(3009, () => {
   console.log(`App is running on http://localhost:3000`);
 });
