@@ -1,9 +1,9 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
-const crawlData = async () => {
+const crawlData = async (address = "") => {
   try {
     const result = await axios.get(
-      "https://sepolia.etherscan.io/address/0xd904F655244c9e2adAc524B4C166e15429F49E5F"
+      `https://sepolia.etherscan.io/address/${address}`
     );
     const returnData = [];
     const $ = cheerio.load(result.data);
